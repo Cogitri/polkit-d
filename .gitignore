@@ -1,0 +1,15 @@
+.dub
+docs.json
+__dummy.html
+docs/
+/polkit-d
+polkit-d.so
+polkit-d.dylib
+polkit-d.dll
+polkit-d.a
+polkit-d.lib
+polkit-d-test-*
+*.exe
+*.o
+*.obj
+*.lst
