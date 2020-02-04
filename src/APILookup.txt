@@ -50,3 +50,7 @@ outputRoot: generated
 wrap: polkit
 file: Polkit-1.0.gir
 srcDir: polkit
+
+struct: Permission
+noCode: new
+move: new_sync Permission this
