@@ -1,0 +1,43 @@
+name: Run Unittests
+on: [push, pull_request]
+
+jobs:
+  test:
+    name: Tests
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest]
+        dc: [dmd-latest, ldc-latest]
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v1
+      - uses: actions/setup-python@v1
+        with:
+          python-version: "3.x"
+
+      - name: Install D compiler
+        uses: mihails-strasuns/setup-dlang@v0.5.0
+        with:
+          compiler: ${{ matrix.dc }}
+
+      - name: Install meson
+        run: pip3 install meson
+
+      - name: Install dependencies via APT
+        run: sudo apt-get install libpolkit-gobject-1-dev glib-2.0-dev gobject-introspection libgirepository1.0-dev ninja-build
+
+      - name: Install gir-to-d
+        run: |
+          git clone https://github.com/gtkd-developers/gir-to-d
+          cd gir-to-d
+          meson build && ninja -C build && sudo ninja -C build install
+
+      - name: Install glibd
+        run: |
+          git clone https://github.com/gtkd-developers/GlibD
+          cd GlibD
+          meson build && ninja -C build && sudo ninja -C build install
+
+      - name: Test meson build
+        run: meson build && ninja -C build
