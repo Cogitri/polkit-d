@@ -1,0 +1,5 @@
+option('gir-dir',
+  description: 'Directory in which the GIR files are located',
+  type: 'string',
+  value: '/usr/share/gir-1.0',
+)
