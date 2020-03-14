@@ -45,12 +45,15 @@ polkitd = library('polkit-gobjectd-1',
     soversion: project_soversion,
     version: meson.project_version())
 
-install_subdir(join_paths(build_root, gen_dir, 'polkit'),    install_dir: 'include/d/polkit-gobjectd-1/polkit-gobjectd-1')
+install_subdir(
+    join_paths(build_root, gen_dir, 'polkit'),
+    install_dir: 'include/d/polkit-gobjectd-1/',
+)
 
 pkgc.generate(polkitd,
     name: 'polkit-gobjectd-1',
     subdirs: 'd/polkit-gobjectd-1',
     version: meson.project_version(),
     requires: [polkit_gobject_dep],
-    description: 'D bindings for Polkit-GObject.')
-
+    description: 'D bindings for Polkit-GObject.',
+)
